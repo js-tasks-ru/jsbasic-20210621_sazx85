@@ -1,12 +1,10 @@
 
 function showSalary(arr, age) {
-  let str = [];
+  let someUsers = arr.filter(item => item.age <= age);
 
-  for (let value of arr) {
-    if ( value.age <= age ) {
-      str.push(`${value.name}, ${value.balance}`);
-    }
-  }
+  let result = someUsers.map(function(item, index, array) {
+    return `${item.name}, ${item.balance}`;
+  });
 
-  return str.join("\n");
+  return result.join("\n");
 }
