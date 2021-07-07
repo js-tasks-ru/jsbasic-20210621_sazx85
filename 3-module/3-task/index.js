@@ -1,9 +1,13 @@
 function camelize(str) {
   let arr = str.split("-");
 
-  for (let i = 1; i < arr.length; i++) {
-    arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
-  }
+  let result = arr.map(function(item, index, array) {
+    if (index === 0) {
+      return item;
+    }
 
-  return arr.join("");
+    return item[0].toUpperCase() + item.slice(1);
+  });
+
+  return result.join("");
 }
