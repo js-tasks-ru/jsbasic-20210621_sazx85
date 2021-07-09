@@ -19,9 +19,11 @@ function highlight(table) {
       if (cell.innerHTML === "m") {
         rows[i].classList.add('male');
       }
+      
       if (cell.innerHTML === "f") {
         rows[i].classList.add('female');
       }
+      
       if (isFinite(cell.innerHTML) && cell.innerHTML < 18) {
         rows[i].style.textDecoration = "line-through";
       }
