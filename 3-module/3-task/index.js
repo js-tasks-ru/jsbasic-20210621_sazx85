@@ -1,7 +1,7 @@
 function camelize(str) {
   let arr = str.split("-");
 
-  let result = arr.map(function(item, index, array) {
+  let result = arr.map((item, index) => {
     if (index === 0) {
       return item;
     }
