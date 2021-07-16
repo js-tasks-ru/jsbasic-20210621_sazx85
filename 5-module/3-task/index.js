@@ -11,7 +11,7 @@ function initCarousel() {
   arrowLeft.addEventListener('click', function () {
     arrowRight.style.display = '';
     currentOffset -= carouselSwiper.offsetWidth;
-    carouselSwiper.style.transform = 'translateX(-' + currentOffset + 'px)';
+    carouselSwiper.style.transform = `translateX(-${currentOffset}px)`;
 
     if (currentOffset === 0) {
       this.style.display = 'none';
@@ -21,7 +21,7 @@ function initCarousel() {
   arrowRight.addEventListener('click', function () {
     arrowLeft.style.display = '';
     currentOffset += carouselSwiper.offsetWidth;
-    carouselSwiper.style.transform = 'translateX(-' + currentOffset + 'px)';
+    carouselSwiper.style.transform = `translateX(-${currentOffset}px)`;
 
     if (currentOffset === (sliderLength.length - 1) * carouselSwiper.offsetWidth) {
       this.style.display = 'none';
