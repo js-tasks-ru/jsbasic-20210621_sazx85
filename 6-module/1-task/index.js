@@ -16,6 +16,7 @@ export default class UserTable {
 
   constructor(rows) {
     this._rows = rows;
+    this.elem = this.createTable();
   }
 
   createTable() {
@@ -62,13 +63,9 @@ export default class UserTable {
 
     button.addEventListener('click', function () {
       this.closest('tr').remove();
-    })
+    });
 
     return cell;
-  }
-
-  get elem() {
-    return this.createTable();
   }
 
 }
