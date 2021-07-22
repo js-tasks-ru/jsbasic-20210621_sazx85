@@ -17,11 +17,11 @@ export default class Carousel {
   currentOffset = 0;
 
   _createSlides = () => {
-    const m = this.slides;
     let slide;
 
-    m.forEach(element => {
-      slide = createElement(`<div class="carousel__slide" data-id="${element.id}">
+    this.slides.forEach(element => {
+      slide = createElement(`
+          <div class="carousel__slide" data-id="${element.id}">
             <img src="/assets/images/carousel/${element.image}" class="carousel__img" alt="slide">
             <div class="carousel__caption">
               <span class="carousel__price">€${element.price.toFixed(2)}</span>
@@ -30,7 +30,8 @@ export default class Carousel {
                 <img src="/assets/images/icons/plus-icon.svg" alt="icon">
               </button>
             </div>
-          </div>`);
+          </div>
+      `);
 
       const button = slide.querySelector('.carousel__button');
 
@@ -41,12 +42,14 @@ export default class Carousel {
 
       this.carouselInner.append(slide);
     });
+
+    this.carousel.append(this.carouselInner);
   }
 
   _onArrowLeftClick = () => {
     this.arrowRight.style.display = '';
     this.currentOffset -= this.carouselInner.offsetWidth;
-    this.carouselInner.style.transform = `translateX(-${this.currentOffset}px)`;
+    this._translateSlides(this.currentOffset);
 
     if (this.currentOffset === 0) {
       this.arrowLeft.style.display = 'none';
@@ -56,18 +59,21 @@ export default class Carousel {
   _onArrowRightClick = () => {
     this.arrowLeft.style.display = '';
     this.currentOffset += this.carouselInner.offsetWidth;
-    this.carouselInner.style.transform = `translateX(-${this.currentOffset}px)`;
+    this._translateSlides(this.currentOffset);
 
     if (this.currentOffset === (this.slides.length - 1) * this.carouselInner.offsetWidth) {
       this.arrowRight.style.display = 'none';
     }
   }
 
+  _translateSlides = (offset) => {
+    this.carouselInner.style.transform = `translateX(-${offset}px)`;
+  }
+
   _createSlider = () => {
     this.carousel.append(this.arrowRight);
     this.carousel.append(this.arrowLeft);
     this._createSlides();
-    this.carousel.append(this.carouselInner);
 
     this.arrowLeft.style.display = 'none';
     this.arrowLeft.addEventListener('click', this._onArrowLeftClick);

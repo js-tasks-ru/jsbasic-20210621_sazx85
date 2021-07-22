@@ -1,3 +1,4 @@
+import createElement from '../../assets/lib/create-element.js';
 /**
  * Компонент, который реализует таблицу
  * с возможностью удаления строк
@@ -20,10 +21,23 @@ export default class UserTable {
   }
 
   createTable() {
-    let table = this.createTableHeader();
-    let m = this._rows;
+    let table = createElement(`
+      <table>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+            <th>Зарплата</th>
+            <th>Город</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    `);
 
-    m.forEach(element => {
+    this._rows.forEach(element => {
       let tr = document.createElement('tr');
       for (let key in element) {
         let td = document.createElement('td');
@@ -37,28 +51,10 @@ export default class UserTable {
     return table;
   }
 
-  createTableHeader () {
-    let tableHeader = document.createElement('table');
-    tableHeader.innerHTML = `<thead>
-        <tr>
-          <th>Имя</th>
-          <th>Возраст</th>
-          <th>Зарплата</th>
-          <th>Город</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>`;
-
-    return tableHeader;
-  }
-
   createButton () {
     let cell = document.createElement('td');
-    let button = document.createElement('button')
+    let button = createElement('<button>X</button>');
 
-    button.innerHTML = 'X';
     cell.append(button);
 
     button.addEventListener('click', function () {
