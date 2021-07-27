@@ -2,19 +2,29 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
   constructor() {
-    this.title = null;
-    this.body = null;
+    this._renderModal();
   }
 
   setTitle(title) {
-    this.title = title;
+    let modalTitle = document.querySelector('.modal__title');
+    modalTitle.innerText = title;
   }
 
   setBody(body) {
-    this.body = body;
+    let modalBody = document.querySelector('.modal__body');
+    modalBody.append(body);
   }
 
   open = () => {
+    let modalClose = document.querySelector('.modal__close');
+
+    modalClose.addEventListener('click', this.close);
+    document.addEventListener('keydown', this.keyListen);
+    
+    document.body.classList.add('is-modal-open');
+  }
+
+  _renderModal = () => {
     let modal = createElement(`
       <div class="modal">
         <div class="modal__overlay"></div>
@@ -32,26 +42,20 @@ export default class Modal {
       </div>
     `);
     document.body.append(modal);
+    this.rendered = true;
+  }
 
-    let modalTitle = document.querySelector('.modal__title');
-    let modalBody = document.querySelector('.modal__body');
-    let modalClose = document.querySelector('.modal__close');
-
-    modalTitle.innerText = this.title;
-    modalBody.innerHTML = this.body;
-
-    modalClose.addEventListener('click', this.close);
-    document.addEventListener('keydown', function(event) {
-      if (event.code === 'Escape' && document.body.classList.contains('is-modal-open')) {
-        document.body.classList.remove('is-modal-open');
-        document.body.querySelector('.modal').remove();
-      }
-    });
-    
-    document.body.classList.add('is-modal-open');
+  keyListen = (e) => {
+    if (e.code === 'Escape' &&  document.body.classList.contains('is-modal-open')) {
+      this.close();
+    }
   }
 
   close = () => {
+    let modalClose = document.querySelector('.modal__close');
+    modalClose.removeEventListener('click', this.close);
+    document.removeEventListener('keydown', this.keyListen);
+
     document.body.classList.remove('is-modal-open');
     document.body.querySelector('.modal').remove();
   }
