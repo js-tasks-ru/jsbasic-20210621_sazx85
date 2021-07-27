@@ -6,17 +6,15 @@ export default class Modal {
   }
 
   setTitle(title) {
-    let modalTitle = document.querySelector('.modal__title');
-    modalTitle.innerText = title;
+    document.querySelector('.modal .modal__title').innerText = title;
   }
 
   setBody(body) {
-    let modalBody = document.querySelector('.modal__body');
-    modalBody.append(body);
+    document.querySelector('.modal .modal__body').append(body);
   }
 
   open = () => {
-    let modalClose = document.querySelector('.modal__close');
+    let modalClose = document.querySelector('.modal .modal__close');
 
     modalClose.addEventListener('click', this.close);
     document.addEventListener('keydown', this.keyListen);
@@ -51,7 +49,7 @@ export default class Modal {
   }
 
   close = () => {
-    let modalClose = document.querySelector('.modal__close');
+    let modalClose = document.querySelector('.modal .modal__close');
     modalClose.removeEventListener('click', this.close);
     document.removeEventListener('keydown', this.keyListen);
 
