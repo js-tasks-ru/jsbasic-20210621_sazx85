@@ -42,11 +42,10 @@ export default class Modal {
       </div>
     `);
     document.body.append(modal);
-    this.rendered = true;
   }
 
   keyListen = (e) => {
-    if (e.code === 'Escape' &&  document.body.classList.contains('is-modal-open')) {
+    if (e.code === 'Escape') {
       this.close();
     }
   }
