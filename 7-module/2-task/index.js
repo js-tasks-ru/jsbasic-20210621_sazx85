@@ -6,17 +6,15 @@ export default class Modal {
   }
 
   setTitle(title) {
-    document.querySelector('.modal .modal__title').innerText = title;
+    document.querySelector('.modal__title').innerText = title;
   }
 
   setBody(body) {
-    document.querySelector('.modal .modal__body').append(body);
+    document.querySelector('.modal__body').append(body);
   }
 
   open = () => {
-    let modalClose = document.querySelector('.modal .modal__close');
-
-    modalClose.addEventListener('click', this.close);
+    document.querySelector('.modal__close').addEventListener('click', this.close);
     document.addEventListener('keydown', this.keyListen);
     
     document.body.classList.add('is-modal-open');
@@ -49,11 +47,14 @@ export default class Modal {
   }
 
   close = () => {
-    let modalClose = document.querySelector('.modal .modal__close');
-    modalClose.removeEventListener('click', this.close);
-    document.removeEventListener('keydown', this.keyListen);
+    const modalClose = document.querySelector('.modal__close');
 
-    document.body.classList.remove('is-modal-open');
-    document.body.querySelector('.modal').remove();
+    if (modalClose) {
+      modalClose.removeEventListener('click', this.close);
+      document.removeEventListener('keydown', this.keyListen);
+  
+      document.body.classList.remove('is-modal-open');
+      document.body.querySelector('.modal').remove();
+    }
   }
 }
